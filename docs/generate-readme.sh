@@ -15,11 +15,11 @@ PREVIEW_IMAGE_LIST=(
 
 README=$(cat << README
 ## Description:
-Commandline client for Travis-CI.
+Repo I am using to learn the Vulcan graphics API.
 
 ## Libraries used:
-* json
-* libcurl
+* Hunter
+* glfw
 
 README
 )
