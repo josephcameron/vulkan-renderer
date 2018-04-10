@@ -5,7 +5,7 @@ project("Vulcan-Renderer" VERSION "0.0.1" DESCRIPTION "has no description!")
 hunter_add_package(glfw)
 find_package(glfw3 CONFIG REQUIRED)
 add_executable(${PROJECT_NAME}
-    ${PROJECT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${Hunter-Reference_INCLUDE_DIR}
