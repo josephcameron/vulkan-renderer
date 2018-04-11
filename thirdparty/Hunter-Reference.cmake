@@ -1,4 +1,4 @@
-# © 2017 Joseph Cameron - All Rights Reserved
+# © 2018 Joseph Cameron - All Rights Reserved
 # Created on 2018-04-10.
 
 function(jfc_load_personal_dependency JFC_DEPENDENCY_NAME JFC_DEPENDENCY_LIBRARIES)

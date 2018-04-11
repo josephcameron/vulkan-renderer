@@ -1,6 +1,5 @@
-# © 2017 Joseph Cameron - All Rights Reserved
-# Project: Hello Travis CI
-# Created on 2017-12-7.
+# © 2018 Joseph Cameron - All Rights Reserved
+# Created on 2018-04-10.
 
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 enable_testing()

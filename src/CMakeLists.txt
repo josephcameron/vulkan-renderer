@@ -1,5 +1,5 @@
-# © 2017 Joseph Cameron - All Rights Reserved
-# Created on 2017-12-7.
+# © 2018 Joseph Cameron - All Rights Reserved
+# Created on 2018-04-10.
 
 project("Vulcan-Renderer" VERSION "0.0.1" DESCRIPTION "has no description!")
 hunter_add_package(glfw)
