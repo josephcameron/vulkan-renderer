@@ -10,21 +10,9 @@ add_executable(${PROJECT_NAME}
 )
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${glfw_INCLUDE_DIR}
-
-    #${VULKAN_INCLUDE_DIR}
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/include
 )
 target_link_libraries(${PROJECT_NAME}
     ${glfw_LIBRARIES}
-    
-    #${VULKAN_LIBRARIES}
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libvulkan.1.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_core_validation.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_object_tracker.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_parameter_validation.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_threading.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_unique_objects.dylib
-    /Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_utils.dylib
 )
 set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build

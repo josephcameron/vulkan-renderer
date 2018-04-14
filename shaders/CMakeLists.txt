@@ -8,7 +8,7 @@ set(TAG "Shader compiling stage")
 find_program(GLSL_COMPILER glslangValidator)
 
 if(NOT GLSL_COMPILER)
-    jfc_log(FATAL_ERROR ${TAG} "glslangValidator not found! It is required to compile GLSL source to SPIR-V")
+    jfc_log(FATAL_ERROR ${TAG} "glslangValidator not found! It is required to compile GLSL source to SPIR-V.")
 endif()
 
 file(GLOB_RECURSE GLSL_SOURCE_FILES 
