@@ -28,9 +28,9 @@ foreach(GLSL ${GLSL_SOURCE_FILES})
         OUTPUT_VARIABLE GLSL_COMPILER_ERRORS)
 
     if (GLSL_COMPILER_RETURN_VALUE)
-        jfc_log(FATAL_ERROR "${TAG}" "\"${FILE_NAME}\" failed to compile: ${GLSL_COMPILER_ERRORS}")
+        jfc_log(FATAL_ERROR ${TAG} "\"${FILE_NAME}\" failed to compile: ${GLSL_COMPILER_ERRORS}")
     else()
-        jfc_log(STATUS "${TAG}" "\"${FILE_NAME}\" successfully compiled")
+        jfc_log(STATUS ${TAG} "\"${FILE_NAME}\" successfully compiled")
     endif()
 
     list(APPEND SPIRV_BINARY_FILES ${SPIRV})

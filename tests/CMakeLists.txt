@@ -1,6 +1,11 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 # Created on 2018-04-10.
+
+include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
+
 enable_testing()
+
+set(TAG "Testing")
 
 option(JFC_BUILD_TESTS "Build unit tests" ON)
 
@@ -17,5 +22,5 @@ if (JFC_BUILD_TESTS)
     add_test(${PROJECT_NAME} ${PROJECT_NAME})
     
 else()
-    message(STATUS "[Testing] Skipping unit test build step")
+    jfc_log(STATUS ${TAG} "Skipping unit test build step")
 endif()

@@ -54,10 +54,10 @@ endfunction()
 function(jfc_add_dependency aName)
     set(TAG "Library loading stage")
 
-    jfc_log(STATUS "${TAG}" "Processing submodule dependency \"${aName}\".")
+    jfc_log(STATUS ${TAG} "Processing submodule dependency \"${aName}\".")
 
     if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${aName}.cmake)
-        jfc_log(FATAL_ERROR "${TAG}" "${CMAKE_CURRENT_SOURCE_DIR}/${aName}.cmake does not exist. This is required to instruct the loader how to build dependency \"${aName}\".")
+        jfc_log(FATAL_ERROR ${TAG} "${CMAKE_CURRENT_SOURCE_DIR}/${aName}.cmake does not exist. This is required to instruct the loader how to build dependency \"${aName}\".")
     endif()
 
     execute_process(COMMAND git submodule update --init -- ${CMAKE_CURRENT_SOURCE_DIR}/${aName}
@@ -65,7 +65,7 @@ function(jfc_add_dependency aName)
         ERROR_VARIABLE JFC_GIT_ERROR)
 
     if (NOT "${JFC_GIT_ERROR}" STREQUAL "")
-        jfc_log(FATAL_ERROR "${TAG}" "git submodule \"${aName}\" init failed. Does it exist? Raw error message: ${JFC_GIT_ERROR}")
+        jfc_log(FATAL_ERROR ${TAG} "git submodule \"${aName}\" init failed. Does it exist? Raw error message: ${JFC_GIT_ERROR}")
     endif()
 
     set(JFC_DEPENDENCY_NAME "${aName}")
@@ -73,12 +73,12 @@ function(jfc_add_dependency aName)
     include("${aName}.cmake")
 
     if (NOT DEFINED ${aName}_LIBRARIES)
-        jfc_log(WARNING "${TAG}" "${aName}.cmake did not define a variable \"${aName}_LIBRARIES\". Is it header only?")
+        jfc_log(WARNING ${TAG} "${aName}.cmake did not define a variable \"${aName}_LIBRARIES\". Is it header only?")
     endif()
 
     if (NOT DEFINED ${aName}_INCLUDE_DIR)
-        jfc_log(FATAL_ERROR "${TAG}" "${aName}.cmake did not define a variable \"${aName}_INCLUDE_DIR\".")
+        jfc_log(FATAL_ERROR ${TAG} "${aName}.cmake did not define a variable \"${aName}_INCLUDE_DIR\".")
     endif()
 
-    jfc_log(STATUS "${TAG}" "Done processing submodule dependency \"${aName}\". ${aName}_INCLUDE_DIR: ${${aName}_INCLUDE_DIR}, ${aName}_LIBRARIES: ${${aName}_LIBRARIES}")
+    jfc_log(STATUS ${TAG} "Done processing submodule dependency \"${aName}\". ${aName}_INCLUDE_DIR: ${${aName}_INCLUDE_DIR}, ${aName}_LIBRARIES: ${${aName}_LIBRARIES}")
 endfunction()
