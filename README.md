@@ -19,7 +19,7 @@
 | Coverage | https://coveralls.io/github/jfcameron/vulcan-renderer |
 
 ## Description:
-Repo I am using to learn the Vulcan graphics API.
+Repo I am using to learn the Vulkan graphics API.
 
 ## Libraries used:
 * Hunter

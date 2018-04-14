@@ -15,7 +15,7 @@ PREVIEW_IMAGE_LIST=(
 
 README=$(cat << README
 ## Description:
-Repo I am using to learn the Vulcan graphics API.
+Repo I am using to learn the Vulkan graphics API.
 
 ## Libraries used:
 * Hunter
