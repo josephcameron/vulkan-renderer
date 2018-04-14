@@ -5,7 +5,11 @@ include("${PROJECT_SOURCE_DIR}/cmake/jfclib.cmake")
 
 set(TAG "Shader compiling stage")
 
-set(GLSL_COMPILER "glslangValidator")
+find_program(GLSL_COMPILER glslangValidator)
+
+if(NOT GLSL_COMPILER)
+    jfc_log(FATAL_ERROR ${TAG} "glslangValidator not found!")
+endif()
 
 file(GLOB_RECURSE GLSL_SOURCE_FILES 
     *.vert
@@ -32,6 +36,4 @@ foreach(GLSL ${GLSL_SOURCE_FILES})
     else()
         jfc_log(STATUS ${TAG} "\"${FILE_NAME}\" successfully compiled")
     endif()
-
-    list(APPEND SPIRV_BINARY_FILES ${SPIRV})
 endforeach(GLSL)
