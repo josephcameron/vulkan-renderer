@@ -7,8 +7,6 @@ enable_testing()
 
 set(TAG "Testing")
 
-option(JFC_BUILD_TESTS "Build unit tests" ON)
-
 if (JFC_BUILD_TESTS)
     add_executable(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
@@ -19,8 +17,7 @@ if (JFC_BUILD_TESTS)
         Catch2::Catch
     )
     target_compile_features(${PROJECT_NAME} ${JFC_CXX_COMPILER_FEATURE_REQUIREMENTS})
-    add_test(${PROJECT_NAME} ${PROJECT_NAME})
-    
+    add_test(${PROJECT_NAME} ${PROJECT_NAME})    
 else()
     jfc_log(STATUS ${TAG} "Skipping unit test build step")
 endif()
