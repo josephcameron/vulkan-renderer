@@ -3,7 +3,5 @@
 
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
-project("")
-
 jfc_add_dependency("glfw")
 jfc_add_dependency("Catch2")
