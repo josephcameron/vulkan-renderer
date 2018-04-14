@@ -45,5 +45,5 @@ execute_process(COMMAND git log -1 --format=%cd --date=local HEAD
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} 
     OUTPUT_VARIABLE JFC_GIT_COMMIT_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-configure_file(${CMAKE_SOURCE_DIR}/cmake.h.in 
-    ${CMAKE_SOURCE_DIR}/cmake.h @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake.h.in 
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake.h @ONLY)
