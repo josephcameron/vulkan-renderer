@@ -80,5 +80,5 @@ function(jfc_add_dependency aName)
         jfc_log(FATAL_ERROR "${TAG}" "${aName}.cmake did not define a variable \"${aName}_INCLUDE_DIR\".")
     endif()
 
-    jfc_log(STATUS "${TAG}" "Done processing submodule dependency \"${aName}\".")
+    jfc_log(STATUS "${TAG}" "Done processing submodule dependency \"${aName}\". ${aName}_INCLUDE_DIR: ${${aName}_INCLUDE_DIR}, ${aName}_LIBRARIES: ${${aName}_LIBRARIES}")
 endfunction()
