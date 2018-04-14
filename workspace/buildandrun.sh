@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 cmake .. \
--DOPENSSL_ROOT_DIR=/usr/local/opt/openssl \
--DOPENSSL_LIBRARIES=/usr/local/opt/openssl/lib \
+#-DVULKAN_INCLUDE_DIR=/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/include \
+#-DVULKAN_LIBRARIES=/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libMoltenVK.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_core_validation.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_object_tracker.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_parameter_validation.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_threading.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_unique_objects.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_utils.dylib \
+#-DVULKAN_LIBRARIES=/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libMoltenVK.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_core_validation.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_object_tracker.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_parameter_validation.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_threading.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_unique_objects.dylib;/Users/josephcameron/Workspace/vulkansdk-macos-1.0.69.0/macOS/lib/libVkLayer_utils.dylib \
 
-make && for file in ../build/*; do 
+make && pushd ../build && for file in *; do 
 (
-    [[ -x "$file" ]] && $file "${@:1}"
+    [[ -x "$file" ]] && ./$file "${@:1}"
 ); done

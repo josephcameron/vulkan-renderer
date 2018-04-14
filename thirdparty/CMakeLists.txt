@@ -1,4 +1,8 @@
 # © 2018 Joseph Cameron - All Rights Reserved
-# Created on 2018-04-10.
+# Created on 2018-04-13.
 
-#include("Hunter-Reference.cmake")
+include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
+
+project("")
+
+jfc_add_dependency("glfw")
