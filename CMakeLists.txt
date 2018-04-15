@@ -14,6 +14,7 @@ set(JFC_CXX_COMPILER_FEATURE_REQUIREMENTS PRIVATE
 add_subdirectory(tests)
 add_subdirectory(thirdparty)
 add_subdirectory(shaders)
+add_subdirectory(resources)
 add_subdirectory(src)
 
 get_cmake_property(_variableNames VARIABLES)
