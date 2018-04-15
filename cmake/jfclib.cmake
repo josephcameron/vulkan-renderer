@@ -62,9 +62,10 @@ function(jfc_add_dependency aName)
 
     execute_process(COMMAND git submodule update --init -- ${CMAKE_CURRENT_SOURCE_DIR}/${aName}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        ERROR_VARIABLE JFC_GIT_ERROR)
+        RESULT_VARIABLE GIT_RETURN_VALUE
+        OUTPUT_VARIABLE GIT_ERRORS)
 
-    if (NOT "${JFC_GIT_ERROR}" STREQUAL "")
+    if (GIT_RETURN_VALUE) #if (NOT "${JFC_GIT_ERROR}" STREQUAL "")
         jfc_log(FATAL_ERROR ${TAG} "git submodule \"${aName}\" init failed. Does it exist? Raw error message: ${JFC_GIT_ERROR}")
     endif()
 
