@@ -10,7 +10,7 @@ SUPPORTED_PLATFORM_LIST=(
 )
 
 PREVIEW_IMAGE_LIST=(
-    #EarlyRender.png
+    Chalet.png
 )
 
 README=$(cat << README
