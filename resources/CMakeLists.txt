@@ -9,7 +9,7 @@ function(jfc_export_resource aResourceDirectory)
     jfc_log(STATUS ${TAG} "Exporting ${aResourceDirectory}")
 
     file(COPY "${aResourceDirectory}" 
-        DESTINATION ${CMAKE_SOURCE_DIR}/build/resource/)
+        DESTINATION ${CMAKE_SOURCE_DIR}/build/)
 endfunction()
 
 jfc_export_resource("models")
