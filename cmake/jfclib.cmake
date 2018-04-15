@@ -82,3 +82,18 @@ function(jfc_add_dependency aName)
 
     jfc_log(STATUS ${TAG} "Done processing submodule dependency \"${aName}\". ${aName}_INCLUDE_DIR: ${${aName}_INCLUDE_DIR}, ${aName}_LIBRARIES: ${${aName}_LIBRARIES}")
 endfunction()
+
+#[[! log all variables in the global scope and halt execution. ]]
+function(jfc_print_all_variables_and_halt)
+    get_cmake_property(cmakevars VARIABLES)
+    
+    list(SORT cmakevars)
+    set(output "")
+    
+    foreach (currentvar ${cmakevars})
+        string(CONCAT output "${output}" "${currentvar}=${${currentvar}}\n")
+    endforeach()
+
+    jfc_log(STATUS "Dump" "Called from ${CMAKE_CURRENT_LIST_FILE}...\n${output}")
+    message(FATAL_ERROR "Dump end.")
+endfunction()

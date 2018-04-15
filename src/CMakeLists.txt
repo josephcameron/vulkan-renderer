@@ -10,6 +10,9 @@ add_executable(${PROJECT_NAME}
 )
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${glfw_INCLUDE_DIR}
+    ${glm_INCLUDE_DIR}
+    ${stb_INCLUDE_DIR}
+    ${tinyobjloader_INCLUDE_DIR}
 )
 target_link_libraries(${PROJECT_NAME}
     ${glfw_LIBRARIES}

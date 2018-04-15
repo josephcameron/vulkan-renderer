@@ -5,4 +5,12 @@ include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 set(TAG "Resource exporter")
 
-jfc_log(WARNING ${TAG} "Unimplemented. Should move images etc. into the output dir along with exec")
+function(jfc_export_resource aResourceDirectory)
+    jfc_log(STATUS ${TAG} "Exporting ${aResourceDirectory}")
+
+    file(COPY "${aResourceDirectory}" 
+        DESTINATION ${CMAKE_SOURCE_DIR}/build/resource/)
+endfunction()
+
+jfc_export_resource("models")
+jfc_export_resource("textures")
