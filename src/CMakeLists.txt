@@ -24,7 +24,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 )
 target_compile_features(${PROJECT_NAME} ${JFC_CXX_COMPILER_FEATURE_REQUIREMENTS})
 
-#[[# Format source files
+# Format source files
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 find_program(FORMATTER clang-format)
@@ -45,13 +45,15 @@ else()
             RESULT_VARIABLE FORMATTER_RETURN_VALUE
             OUTPUT_VARIABLE FORMATTER_ERRORS)
 
+        get_filename_component(JFC_SOURCE_NAME ${JFC_SOURCE} NAME)
+
         if(FORMATTER_RETURN_VALUE)
-            jfc_log(FATAL_ERROR ${TAG} "\"${FILE_NAME}\" failed to format: ${FORMATTER_ERRORS}")
+            jfc_log(FATAL_ERROR ${TAG} "\"${JFC_SOURCE_NAME}\" failed to format: ${FORMATTER_ERRORS}")
         else()
-            jfc_log(STATUS ${TAG} "\"${FILE_NAME}\" successfully formatted")
+            jfc_log(STATUS ${TAG} "\"${JFC_SOURCE_NAME}\" successfully formatted")
         endif()
     endforeach()
-endif()]]
+endif()
 
 # Generated header
 string(RANDOM LENGTH 15 JFC_RANDOM_128BITS)
