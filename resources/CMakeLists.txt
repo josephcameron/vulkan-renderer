@@ -3,13 +3,17 @@
 
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
-set(TAG "Resource exporter")
-
 function(jfc_export_resource aResourceDirectory)
-    jfc_log(STATUS ${TAG} "Exporting ${aResourceDirectory}")
+    set(TAG "Resource exporter")
 
-    file(COPY "${aResourceDirectory}" 
-        DESTINATION ${CMAKE_SOURCE_DIR}/build/)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${aResourceDirectory}" AND IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${aResourceDirectory}")
+        jfc_log(STATUS ${TAG} "Exporting ${aResourceDirectory}")
+
+        file(COPY "${aResourceDirectory}" 
+            DESTINATION ${CMAKE_SOURCE_DIR}/build/)
+    else()
+        jfc_log(FATAL_ERROR ${TAG} "\"${aResourceDirectory}\" does not exist or is not a directory.")
+    endif()
 endfunction()
 
 jfc_export_resource("models")
