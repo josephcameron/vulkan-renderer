@@ -4,8 +4,8 @@
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 project("Vulkan-Renderer"
-    VERSION "0.0.1" 
-    DESCRIPTION "has no description!")
+    VERSION "1.0" 
+    DESCRIPTION "executable demo using the Vulkan API to draw 3D graphics")
 
 add_executable(${PROJECT_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)

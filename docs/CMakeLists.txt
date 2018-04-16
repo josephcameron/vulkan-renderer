@@ -5,7 +5,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 set(TAG "Documentation")
 
-if(JFC_BUILD_DOCS)
+function(jfc_generate_doxygen_docs)
     find_program(DOXYGEN doxygen)
 
     if(NOT DOXYGEN)
@@ -34,6 +34,10 @@ if(JFC_BUILD_DOCS)
             jfc_log(STATUS ${TAG} "Doxygen successfully completed")
         endif()
     endif()
+endfunction()
+
+if(JFC_BUILD_DOCS)
+    jfc_generate_doxygen_docs()
 else()
     jfc_log(STATUS ${TAG} "Skipping documentation.")
 endif()
