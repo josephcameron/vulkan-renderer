@@ -13,6 +13,7 @@ set(JFC_CXX_COMPILER_FEATURE_REQUIREMENTS PRIVATE
     cxx_nullptr
     cxx_lambdas)
 
+add_subdirectory(docs)
 add_subdirectory(tests)
 add_subdirectory(thirdparty)
 add_subdirectory(shaders)

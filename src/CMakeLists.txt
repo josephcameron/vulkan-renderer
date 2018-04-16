@@ -3,26 +3,27 @@
 
 project("Vulkan-Renderer"
     VERSION "0.0.1" 
-    DESCRIPTION "has no description!"
-)
+    DESCRIPTION "has no description!")
+
 add_executable(${PROJECT_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-)
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${glfw_INCLUDE_DIR}
     ${glm_INCLUDE_DIR}
     ${stb_INCLUDE_DIR}
-    ${tinyobjloader_INCLUDE_DIR}
-)
+    ${tinyobjloader_INCLUDE_DIR})
+
 target_link_libraries(${PROJECT_NAME}
-    ${glfw_LIBRARIES}
-)
+    ${glfw_LIBRARIES})
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
-)
-target_compile_features(${PROJECT_NAME} ${JFC_CXX_COMPILER_FEATURE_REQUIREMENTS})
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
+
+target_compile_features(${PROJECT_NAME} 
+    ${JFC_CXX_COMPILER_FEATURE_REQUIREMENTS})
 
 # Format source files
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
