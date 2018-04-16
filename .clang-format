@@ -1,0 +1,40 @@
+# © 2018 Joseph Cameron - All Rights Reserved
+# Created on 2018-04-10.
+BasedOnStyle: LLVM
+
+ColumnLimit: 180
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true
+    AfterControlStatement: true
+    AfterEnum: true 
+    AfterFunction: true
+    AfterNamespace: true
+    AfterObjCDeclaration: true
+    AfterStruct: true
+    AfterUnion: true
+    BeforeCatch: true
+    BeforeElse: true
+    IndentBraces: false
+
+IndentWidth: 4
+
+AccessModifierOffset: -4
+
+NamespaceIndentation: Inner #All
+CompactNamespaces: true
+
+MaxEmptyLinesToKeep: 1
+
+PointerAlignment: Right
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: false
+AlignOperands: false
+
+#AllowShortBlocksOnASingleLine: true
+
+AlignAfterOpenBracket: DontAlign
+
+FixNamespaceComments: false

@@ -1,7 +1,7 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 # Created on 2018-04-10.
 
-project("Vulkan-Renderer" 
+project("Vulkan-Renderer"
     VERSION "0.0.1" 
     DESCRIPTION "has no description!"
 )
@@ -23,6 +23,35 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
 )
 target_compile_features(${PROJECT_NAME} ${JFC_CXX_COMPILER_FEATURE_REQUIREMENTS})
+
+#[[# Format source files
+include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
+
+find_program(FORMATTER clang-format)
+
+if(NOT FORMATTER)
+    jfc_log(FATAL_ERROR ${TAG} "clang-format not found! It is required to compile GLSL source to SPIR-V.")
+else()
+    file(GLOB_RECURSE JFC_SOURCES
+        *.h *.hpp
+        *.cpp *.cxx
+        *.c)
+
+        set(TAG "Code formatting stage")
+
+    foreach(JFC_SOURCE ${JFC_SOURCES})
+        execute_process(COMMAND clang-format -i ${JFC_SOURCE}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} 
+            RESULT_VARIABLE FORMATTER_RETURN_VALUE
+            OUTPUT_VARIABLE FORMATTER_ERRORS)
+
+        if(FORMATTER_RETURN_VALUE)
+            jfc_log(FATAL_ERROR ${TAG} "\"${FILE_NAME}\" failed to format: ${FORMATTER_ERRORS}")
+        else()
+            jfc_log(STATUS ${TAG} "\"${FILE_NAME}\" successfully formatted")
+        endif()
+    endforeach()
+endif()]]
 
 # Generated header
 string(RANDOM LENGTH 15 JFC_RANDOM_128BITS)
