@@ -6,6 +6,8 @@ cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 option(JFC_BUILD_TESTS "Build unit tests" ON)
 set(JFC_TARGET_PLATFORM "${CMAKE_HOST_SYSTEM_NAME}" CACHE STRING "Platform to compile the project for")
 
+set(JFC_REPOSITORY_ROOT "${CMAKE_CURRENT_SOURCE_DIR}") #Not used
+
 set(JFC_CXX_COMPILER_FEATURE_REQUIREMENTS PRIVATE
     cxx_variadic_templates
     cxx_nullptr

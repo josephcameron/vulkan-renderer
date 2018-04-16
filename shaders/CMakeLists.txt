@@ -1,7 +1,7 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 # Created on 2018-04-13.
 
-include("${PROJECT_SOURCE_DIR}/cmake/jfclib.cmake")
+include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 set(TAG "Shader compiling stage")
 
@@ -17,9 +17,9 @@ file(GLOB_RECURSE GLSL_SOURCE_FILES
 foreach(GLSL ${GLSL_SOURCE_FILES})
     get_filename_component(FILE_NAME ${GLSL} NAME)
 
-    set(SPIRV "${PROJECT_SOURCE_DIR}/build/shaders/${FILE_NAME}.spv")
+    set(SPIRV "${CMAKE_SOURCE_DIR}/build/shaders/${FILE_NAME}.spv")
 
-    make_directory("${PROJECT_SOURCE_DIR}/build/shaders/")
+    make_directory("${CMAKE_SOURCE_DIR}/build/shaders/")
 
     execute_process(COMMAND ${GLSL_COMPILER} -V ${GLSL} -o ${SPIRV}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
