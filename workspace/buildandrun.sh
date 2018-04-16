@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-cmake ..
-
-make && pushd ../build && for file in *; do 
-(
-    [[ -x "$file" ]] && ./$file "${@:1}"
-); done
+cmake \
+-DJFC_BUILD_DOCS=OFF \
+-DJFC_BUILD_TESTS=ON \
+-DJFC_AUTO_RUN_APP=OFF \
+ \
+.. && make
