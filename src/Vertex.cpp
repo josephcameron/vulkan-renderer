@@ -1,5 +1,7 @@
 #include <vkrenderer/Vertex.h>
 
+namespace vkrenderer
+{
 VkVertexInputBindingDescription Vertex::getBindingDescription()
 {
     VkVertexInputBindingDescription bindingDescription = {};
@@ -33,4 +35,8 @@ std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescription
     return attributeDescriptions;
 }
 
-bool operator==(const Vertex &a, const Vertex &b) { return a.pos == b.pos && a.color == b.color && a.texCoord == b.texCoord; }
+bool operator==(const Vertex &a, const Vertex &b)
+{
+    return a.pos == b.pos && a.color == b.color && a.texCoord == b.texCoord;
+}
+}

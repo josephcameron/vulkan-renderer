@@ -8,6 +8,8 @@
 
 #include <array>
 
+namespace vkrenderer
+{
 /*!
     Vertex definition. Should be extenible. Statically via templates.
 */
@@ -25,5 +27,6 @@ struct Vertex
 };
 
 bool operator==(const Vertex &a, const Vertex &b);
+}
 
 #endif

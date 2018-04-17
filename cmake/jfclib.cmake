@@ -1,10 +1,10 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 
-message(AUTHOR_WARNING "\
+#[[message(AUTHOR_WARNING "\
 special variables from within jfclib.cmake:\n\
 CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}\n\
 CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}\n\
-")
+")]]
 
 #[[! print a message with colorized text
     @param aLogLevel: standard cmake log levels e.g: STATUS, FATAL_ERROR
