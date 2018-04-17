@@ -9,7 +9,7 @@
 #include <array>
 
 /*!
-    Vertex definition. Should be extenible? Via templates?
+    Vertex definition. Should be extenible. Statically via templates.
 */
 struct Vertex
 {

@@ -1,5 +1,11 @@
 # © 2018 Joseph Cameron - All Rights Reserved
 
+message(AUTHOR_WARNING "\
+special variables from within jfclib.cmake:\n\
+CMAKE_CURRENT_LIST_FILE: ${CMAKE_CURRENT_LIST_FILE}\n\
+CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}\n\
+")
+
 #[[! print a message with colorized text
     @param aLogLevel: standard cmake log levels e.g: STATUS, FATAL_ERROR
     @param aTag: Hint about where in the project the log is coming from
@@ -65,7 +71,7 @@ function(jfc_add_dependency aName)
         RESULT_VARIABLE GIT_RETURN_VALUE
         OUTPUT_VARIABLE GIT_ERRORS)
 
-    if (GIT_RETURN_VALUE) #if (NOT "${JFC_GIT_ERROR}" STREQUAL "")
+    if (GIT_RETURN_VALUE)
         jfc_log(FATAL_ERROR ${TAG} "git submodule \"${aName}\" init failed. Does it exist? Raw error message: ${JFC_GIT_ERROR}")
     endif()
 
