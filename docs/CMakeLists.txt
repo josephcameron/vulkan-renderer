@@ -5,6 +5,7 @@ include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
 set(TAG "Documentation")
 
+#[[! Generate src docs using doxygen ]]
 function(jfc_generate_doxygen_docs)
     find_program(DOXYGEN doxygen)
 
@@ -35,6 +36,12 @@ function(jfc_generate_doxygen_docs)
         endif()
     endif()
 endfunction()
+
+#[[! Generate README.md ]]
+function(jfc_generate_readmemd)
+    jfc_log(WARNING ${TAG} "Readme gen is unimplemented.")
+endfunction()
+jfc_generate_readmemd()
 
 if(JFC_BUILD_DOCS)
     jfc_generate_doxygen_docs()
