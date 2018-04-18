@@ -240,11 +240,13 @@ private:
     {
         cleanupSwapChain();
 
+        // REPLACED
         vkDestroySampler(device, textureSampler, nullptr);
         vkDestroyImageView(device, textureImageView, nullptr);
-
         vkDestroyImage(device, textureImage, nullptr);
         vkFreeMemory(device, textureImageMemory, nullptr);
+        /*auto *const rawPtr = pMyTexture.release();
+        delete rawPtr;*/
 
         vkDestroyDescriptorPool(device, descriptorPool, nullptr);
 

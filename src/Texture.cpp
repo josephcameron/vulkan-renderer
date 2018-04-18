@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <functional>
+#include <iostream>
 
 void endSingleTimeCommands(VkQueue &graphicsQueue, VkDevice &device, VkCommandPool &commandPool, VkCommandBuffer commandBuffer)
 {
@@ -339,6 +340,8 @@ namespace vkrenderer
 {
 Texture::Texture(const std::string &aImageFile, VkDevice &device, VkPhysicalDevice &physicalDevice, VkQueue &graphicsQueue, VkCommandPool &commandPool)
 {
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+
     this->device = device;
 
     int texWidth, texHeight, texChannels;
@@ -398,6 +401,11 @@ Texture::Texture(const std::string &aImageFile, VkDevice &device, VkPhysicalDevi
 
 Texture::~Texture()
 {
-    vkFreeMemory(device, textureImageMemory, nullptr)
+    std::cout << __PRETTY_FUNCTION__ << std::endl;
+
+    /*vkDestroySampler(device, textureSampler, nullptr);
+    vkDestroyImageView(device, textureImageView, nullptr);
+    vkDestroyImage(device, textureImage, nullptr);
+    vkFreeMemory(device, textureImageMemory, nullptr);*/
 }
 }
