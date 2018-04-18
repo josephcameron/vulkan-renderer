@@ -339,6 +339,8 @@ namespace vkrenderer
 {
 Texture::Texture(const std::string &aImageFile, VkDevice &device, VkPhysicalDevice &physicalDevice, VkQueue &graphicsQueue, VkCommandPool &commandPool)
 {
+    this->device = device;
+
     int texWidth, texHeight, texChannels;
 
     std::unique_ptr<stbi_uc, std::function<void(stbi_uc *)>> pixels(
@@ -396,5 +398,6 @@ Texture::Texture(const std::string &aImageFile, VkDevice &device, VkPhysicalDevi
 
 Texture::~Texture()
 {
+    vkFreeMemory(device, textureImageMemory, nullptr)
 }
 }

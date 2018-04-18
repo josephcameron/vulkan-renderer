@@ -15,6 +15,9 @@ class Texture final
 {
     // TEMP
 public:
+    // Context
+    VkDevice device; //!< handle to the device owning the vk context this is bound to
+
     // VRAM handles
     VkDeviceMemory textureImageMemory; //!< handle to texture buffer? handle to a device memory buffer (ie a void ptr)
     VkImage textureImage;              //!< handle to image in memory: applies type to the raw device memory handle
