@@ -47,7 +47,7 @@ endif()
 
 #[[! Format source files
     @param aDirectory: The directory to format ]]
-function(jfc_format_c_cpp_source_recursive aDirectory)
+#[[function(jfc_format_c_cpp_source_recursive aDirectory)
     set(TAG "Code formatting stage")
 
     if (NOT IS_DIRECTORY ${aDirectory})
@@ -78,6 +78,44 @@ function(jfc_format_c_cpp_source_recursive aDirectory)
                 jfc_log(STATUS ${TAG} "\"${JFC_SOURCE_NAME}\" successfully formatted")
             endif()
         endforeach()
+    endif()
+endfunction()]]
+function(jfc_format_c_cpp_source_recursive aDirectory)
+    set(TAG "Code formatting stage")
+
+    if (NOT IS_DIRECTORY ${aDirectory})
+        jfc_log(FATAL_ERROR ${TAG} "${aDirectory} does not exist or is not a directory.")
+    endif()
+
+    find_program(FORMATTER clang-format)
+
+    if(NOT FORMATTER)
+        jfc_log(FATAL_ERROR ${TAG} "clang-format not found! It is required to format the source code.")
+    else()
+        file(GLOB_RECURSE JFC_SOURCES
+            ${aDirectory}/*.h   ${aDirectory}/*.hpp
+            ${aDirectory}/*.cpp ${aDirectory}/*.cxx
+            ${aDirectory}/*.c)
+
+        execute_process(COMMAND ${FORMATTER} files ${JFC_SOURCES} --no-backup -l CPP -c ${CMAKE_SOURCE_DIR}/.uncrustify
+            WORKING_DIRECTORY ${aDirectory}
+            RESULT_VARIABLE FORMATTER_RETURN_VALUE
+            OUTPUT_VARIABLE FORMATTER_ERRORS)
+
+        #[[foreach(JFC_SOURCE ${JFC_SOURCES})
+            execute_process(COMMAND clang-format -i ${JFC_SOURCE}
+                WORKING_DIRECTORY ${aDirectory} 
+                RESULT_VARIABLE FORMATTER_RETURN_VALUE
+                OUTPUT_VARIABLE FORMATTER_ERRORS)
+
+            get_filename_component(JFC_SOURCE_NAME ${JFC_SOURCE} NAME)
+
+            if(FORMATTER_RETURN_VALUE)
+                jfc_log(FATAL_ERROR ${TAG} "\"${JFC_SOURCE_NAME}\" failed to format: ${FORMATTER_ERRORS}")
+            else()
+                jfc_log(STATUS ${TAG} "\"${JFC_SOURCE_NAME}\" successfully formatted")
+            endif()
+        endforeach()]]
     endif()
 endfunction()
 jfc_format_c_cpp_source_recursive(${CMAKE_CURRENT_SOURCE_DIR})
