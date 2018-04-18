@@ -14,6 +14,8 @@
         "stdexcept": "cpp",
         "typeinfo": "cpp",
         "fstream": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "array": "cpp",
+        "tuple": "cpp"
     }
 }

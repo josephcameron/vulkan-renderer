@@ -3,20 +3,24 @@
 
 #include "temp.h"
 
-#include <vkrenderer/Vertex.h>
+#include "Texture.h"
+#include "Vertex.h"
+
+#include <memory>
 
 using namespace vkrenderer;
 
 namespace
 {
+std::unique_ptr<vkrenderer::Texture> pMyTexture;
+
 #ifdef NDEBUG
 constexpr bool enableValidationLayers = false;
 #else
 constexpr bool enableValidationLayers = true;
 #endif
 
-const std::string MODEL_PATH   = "models/chalet.obj";
-const std::string TEXTURE_PATH = "textures/chalet.jpg";
+const std::string MODEL_PATH = "models/chalet.obj";
 
 const std::vector<const char *const> validationLayers = {"VK_LAYER_LUNARG_standard_validation"};
 
@@ -123,7 +127,8 @@ private:
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
 
-    VkCommandPool commandPool;
+    VkCommandPool commandPool; // opaque objects that command buffer memory is allocated from, and which allow the implementation to amortize the cost of
+                               // resource creation across multiple command buffers.
 
     VkImage depthImage;
     VkDeviceMemory depthImageMemory;
@@ -180,7 +185,7 @@ private:
         createCommandPool();
         createDepthResources();
         createFramebuffers();
-        createTextureImage();
+        createTextureImage("textures/chalet.jpg");
         createTextureImageView();
         createTextureSampler();
         loadModel();
@@ -844,17 +849,31 @@ private:
         return format == VK_FORMAT_D32_SFLOAT_S8_UINT || format == VK_FORMAT_D24_UNORM_S8_UINT;
     }
 
-    void createTextureImage()
+    ///\Todo: Determine image format support etc. (Currently only testing jpg)
+    void createTextureImage(const std::string &aImageFile)
     {
-        int texWidth, texHeight, texChannels;
-        stbi_uc *pixels        = stbi_load(TEXTURE_PATH.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha);
-        VkDeviceSize imageSize = texWidth * texHeight * 4;
-        mipLevels              = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
+        ////////
 
-        if (!pixels)
-        {
-            throw std::runtime_error("failed to load texture image!");
-        }
+        pMyTexture = std::unique_ptr<vkrenderer::Texture>(new vkrenderer::Texture(aImageFile, device, physicalDevice, graphicsQueue, commandPool));
+
+        textureImageMemory = pMyTexture->textureImageMemory;
+        textureImage       = pMyTexture->textureImage;
+
+        textureImageView = pMyTexture->textureImageView;
+        textureSampler   = pMyTexture->textureSampler;
+
+        /////////
+
+        /*int texWidth, texHeight, texChannels;
+
+        std::unique_ptr<stbi_uc, std::function<void(stbi_uc *)>> pixels(
+            stbi_load(aImageFile.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha), [](stbi_uc *const p) { stbi_image_free(p); });
+
+        VkDeviceSize imageSize = texWidth * texHeight * 4;
+
+        mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
+
+        if (!pixels.get()) throw std::runtime_error("failed to load texture image!");
 
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
@@ -866,10 +885,8 @@ private:
 
         void *data;
         vkMapMemory(device, stagingBufferMemory, 0, imageSize, 0, &data);
-        memcpy(data, pixels, static_cast<size_t>(imageSize));
+        memcpy(data, pixels.get(), static_cast<size_t>(imageSize));
         vkUnmapMemory(device, stagingBufferMemory);
-
-        stbi_image_free(pixels);
 
         createImage(texWidth,
             texHeight,
@@ -888,7 +905,7 @@ private:
         vkDestroyBuffer(device, stagingBuffer, nullptr);
         vkFreeMemory(device, stagingBufferMemory, nullptr);
 
-        generateMipmaps(textureImage, texWidth, texHeight, mipLevels);
+        generateMipmaps(textureImage, texWidth, texHeight, mipLevels);*/
     }
 
     void generateMipmaps(VkImage image, int32_t texWidth, int32_t texHeight, uint32_t mipLevels)

@@ -7,13 +7,15 @@
 #include <vulkan/vulkan.h>
 
 #include <array>
+#include <type_traits>
 
 namespace vkrenderer
 {
 /*!
     Vertex definition. Should be extenible. Statically via templates.
+    \Warn Uses offset of and is not POD. Bad!
 */
-struct Vertex
+struct Vertex final
 {
     friend bool operator==(const Vertex &a, const Vertex &b);
 
@@ -27,6 +29,8 @@ struct Vertex
 };
 
 bool operator==(const Vertex &a, const Vertex &b);
+
+// static_assert(std::is_pod<Vertex>::value, "Vertex must be pod.");
 }
 
 #endif

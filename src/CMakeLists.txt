@@ -12,11 +12,12 @@ if (JFC_BUILD_APP)
         ${CMAKE_CURRENT_SOURCE_DIR}/temp.cpp # contains imp of header onlys. need to refactor... probably to thirdparty
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Texture.cpp)
 
     target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}
-        ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/include/vkrenderer
         ${glfw_INCLUDE_DIR}
         ${glm_INCLUDE_DIR}
         ${stb_INCLUDE_DIR}

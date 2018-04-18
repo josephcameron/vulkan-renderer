@@ -1,4 +1,4 @@
-#include <vkrenderer/Vertex.h>
+#include "Vertex.h"
 
 namespace vkrenderer
 {
