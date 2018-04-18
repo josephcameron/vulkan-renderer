@@ -11,10 +11,10 @@
 
 namespace vkrenderer
 {
-/*!
-    Vertex definition. Should be extenible. Statically via templates.
-    \Warn Uses offset of and is not POD. Bad!
-*/
+///@brief Vertex definition.
+///@todo Should be extenible. Statically via templates.
+///@warning Uses offsetof and is not POD. This does not comply strictly with standard! Bad!
+///@warning is WIP
 struct Vertex final
 {
     friend bool operator==(const Vertex &a, const Vertex &b);

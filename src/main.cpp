@@ -134,12 +134,14 @@ private:
     VkDeviceMemory depthImageMemory;
     VkImageView depthImageView;
 
+    // Color texture SHOULD BE REMOVED
     uint32_t mipLevels;
     VkImage textureImage;
-    VkDeviceMemory textureImageMemory;
+    // VkDeviceMemory textureImageMemory;
     VkImageView textureImageView;
     VkSampler textureSampler;
 
+    // Model data
     std::vector<Vertex> vertices;
     std::vector<uint32_t> indices;
     VkBuffer vertexBuffer;
@@ -244,9 +246,11 @@ private:
         vkDestroySampler(device, textureSampler, nullptr);
         vkDestroyImageView(device, textureImageView, nullptr);
         vkDestroyImage(device, textureImage, nullptr);
-        vkFreeMemory(device, textureImageMemory, nullptr);
-        /*auto *const rawPtr = pMyTexture.release();
-        delete rawPtr;*/
+        // vkFreeMemory(device, textureImageMemory, nullptr);
+
+        auto *const rawPtr = pMyTexture.release();
+        delete rawPtr;
+        // DONE REPLACE
 
         vkDestroyDescriptorPool(device, descriptorPool, nullptr);
 
@@ -851,63 +855,16 @@ private:
         return format == VK_FORMAT_D32_SFLOAT_S8_UINT || format == VK_FORMAT_D24_UNORM_S8_UINT;
     }
 
-    ///\Todo: Determine image format support etc. (Currently only testing jpg)
+    /// CURRENTLY BEING OOPed
     void createTextureImage(const std::string &aImageFile)
     {
-        ////////
-
         pMyTexture = std::unique_ptr<vkrenderer::Texture>(new vkrenderer::Texture(aImageFile, device, physicalDevice, graphicsQueue, commandPool));
 
-        textureImageMemory = pMyTexture->textureImageMemory;
-        textureImage       = pMyTexture->textureImage;
+        // textureImageMemory = pMyTexture->textureImageMemory;
+        textureImage = pMyTexture->textureImage;
 
         textureImageView = pMyTexture->textureImageView;
         textureSampler   = pMyTexture->textureSampler;
-
-        /////////
-
-        /*int texWidth, texHeight, texChannels;
-
-        std::unique_ptr<stbi_uc, std::function<void(stbi_uc *)>> pixels(
-            stbi_load(aImageFile.c_str(), &texWidth, &texHeight, &texChannels, STBI_rgb_alpha), [](stbi_uc *const p) { stbi_image_free(p); });
-
-        VkDeviceSize imageSize = texWidth * texHeight * 4;
-
-        mipLevels = static_cast<uint32_t>(std::floor(std::log2(std::max(texWidth, texHeight)))) + 1;
-
-        if (!pixels.get()) throw std::runtime_error("failed to load texture image!");
-
-        VkBuffer stagingBuffer;
-        VkDeviceMemory stagingBufferMemory;
-        createBuffer(imageSize,
-            VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-            stagingBuffer,
-            stagingBufferMemory);
-
-        void *data;
-        vkMapMemory(device, stagingBufferMemory, 0, imageSize, 0, &data);
-        memcpy(data, pixels.get(), static_cast<size_t>(imageSize));
-        vkUnmapMemory(device, stagingBufferMemory);
-
-        createImage(texWidth,
-            texHeight,
-            mipLevels,
-            VK_FORMAT_R8G8B8A8_UNORM,
-            VK_IMAGE_TILING_OPTIMAL,
-            VK_IMAGE_USAGE_TRANSFER_SRC_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_SAMPLED_BIT,
-            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-            textureImage,
-            textureImageMemory);
-
-        transitionImageLayout(textureImage, VK_FORMAT_R8G8B8A8_UNORM, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, mipLevels);
-        copyBufferToImage(stagingBuffer, textureImage, static_cast<uint32_t>(texWidth), static_cast<uint32_t>(texHeight));
-        // transitioned to VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL while generating mipmaps
-
-        vkDestroyBuffer(device, stagingBuffer, nullptr);
-        vkFreeMemory(device, stagingBufferMemory, nullptr);
-
-        generateMipmaps(textureImage, texWidth, texHeight, mipLevels);*/
     }
 
     void generateMipmaps(VkImage image, int32_t texWidth, int32_t texHeight, uint32_t mipLevels)

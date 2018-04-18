@@ -8,8 +8,9 @@ if (JFC_BUILD_APP)
         VERSION "1.0" 
         DESCRIPTION "executable demo using the Vulkan API to draw 3D graphics")
 
-    add_executable(${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/temp.cpp # contains imp of header onlys. need to refactor... probably to thirdparty
+    add_executable(${PROJECT_NAME} #MACOSX_BUNDLE
+        ${CMAKE_CURRENT_SOURCE_DIR}/temp.cpp
+        
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/Vertex.cpp
@@ -27,6 +28,7 @@ if (JFC_BUILD_APP)
         ${glfw_LIBRARIES})
 
     set_target_properties(${PROJECT_NAME} PROPERTIES
+        RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time"
         ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)

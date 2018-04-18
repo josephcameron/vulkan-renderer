@@ -10,7 +10,7 @@
 namespace vkrenderer
 {
 ///@brief 2d image used to color frags.
-///@warning incomplete
+///@warning is WIP
 class Texture final
 {
     // TEMP
