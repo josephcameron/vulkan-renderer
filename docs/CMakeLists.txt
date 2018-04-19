@@ -34,6 +34,8 @@ function(jfc_generate_doxygen_docs)
         else()
             jfc_log(STATUS ${TAG} "Doxygen successfully completed")
         endif()
+        
+        file(REMOVE {CMAKE_CURRENT_SOURCE_DIR}/doxy.config)
     endif()
 endfunction()
 
