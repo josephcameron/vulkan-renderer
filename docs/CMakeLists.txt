@@ -12,6 +12,9 @@ function(jfc_generate_doxygen_docs)
     if(NOT DOXYGEN)
         jfc_log(FATAL_ERROR ${TAG} "doxygen not found! It is required to generate documentation.")
     else()
+        set(DOXY_CONFIG_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+        set(DOXY_CONFIG_FILENAME "doxy.config")
+
         execute_process(COMMAND git rev-parse HEAD 
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} 
             OUTPUT_VARIABLE JFC_GIT_COMMIT_HASH OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -21,10 +24,10 @@ function(jfc_generate_doxygen_docs)
             OUTPUT_VARIABLE JFC_GIT_REPO_NAME OUTPUT_STRIP_TRAILING_WHITESPACE)
         get_filename_component(JFC_GIT_REPO_NAME "${JFC_GIT_REPO_NAME}" NAME)
 
-        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/.config/doxy.config.in 
-            ${CMAKE_CURRENT_SOURCE_DIR}/doxy.config @ONLY)
+        configure_file(${DOXY_CONFIG_DIR}/${DOXY_CONFIG_FILENAME}.in 
+            ${CMAKE_CURRENT_SOURCE_DIR}/${DOXY_CONFIG_FILENAME} @ONLY)
 
-        execute_process(COMMAND ${DOXYGEN} doxy.config
+        execute_process(COMMAND ${DOXYGEN} ${DOXY_CONFIG_FILENAME}
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             RESULT_VARIABLE DOXYGEN_RETURN_VALUE
             OUTPUT_VARIABLE DOXYGEN_ERRORS)
@@ -35,7 +38,7 @@ function(jfc_generate_doxygen_docs)
             jfc_log(STATUS ${TAG} "Doxygen successfully completed")
         endif()
         
-        file(REMOVE {CMAKE_CURRENT_SOURCE_DIR}/doxy.config)
+        file(REMOVE "${CMAKE_CURRENT_SOURCE_DIR}/${DOXY_CONFIG_FILENAME}")
     endif()
 endfunction()
 

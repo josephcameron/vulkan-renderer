@@ -1,7 +1,8 @@
 build/*
 
-docs/*
-!docs/.config
+#docs/*
+#!docs/.config
+!README.md.in
 
 src/cmake.h
 
