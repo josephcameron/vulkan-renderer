@@ -1,12 +1,8 @@
 build/*
-
-#docs/*
-#!docs/.config
-!README.md.in
-
-src/cmake.h
-
 workspace/*
+
+docs/doxy.config
+src/cmake.h
 
 !.keep
 !CMakeLists.txt
