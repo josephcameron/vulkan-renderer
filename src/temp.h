@@ -6,10 +6,9 @@
 #ifndef VKRENDER_TEMP_H
 #define VKRENDER_TEMP_H
 
-// clang-format off
 #include <vulkan/vulkan.h>
+
 #include <GLFW/glfw3.h>
-// clang-format on
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

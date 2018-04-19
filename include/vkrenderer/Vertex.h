@@ -17,7 +17,7 @@ namespace vkrenderer
 ///@warning is WIP
 struct Vertex final
 {
-    friend bool operator==(const Vertex &a, const Vertex &b);
+    friend bool operator==(const Vertex& a, const Vertex& b);
 
     glm::vec3 pos      = {};
     glm::vec3 color    = {};
@@ -28,7 +28,7 @@ struct Vertex final
     static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions();
 };
 
-bool operator==(const Vertex &a, const Vertex &b);
+bool operator==(const Vertex& a, const Vertex& b);
 
 // static_assert(std::is_pod<Vertex>::value, "Vertex must be pod.");
 }

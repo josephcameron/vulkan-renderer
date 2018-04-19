@@ -87,17 +87,19 @@ function(jfc_format_c_cpp_source_recursive aDirectory)
         jfc_log(FATAL_ERROR ${TAG} "${aDirectory} does not exist or is not a directory.")
     endif()
 
-    find_program(FORMATTER clang-format)
+    set(FORMATTER_NAME "uncrustify")
+
+    find_program(FORMATTER "${FORMATTER_NAME}")
 
     if(NOT FORMATTER)
-        jfc_log(FATAL_ERROR ${TAG} "clang-format not found! It is required to format the source code.")
+        jfc_log(FATAL_ERROR ${TAG} "${FORMATTER_NAME} not found! It is required to format the source code.")
     else()
         file(GLOB_RECURSE JFC_SOURCES
             ${aDirectory}/*.h   ${aDirectory}/*.hpp
             ${aDirectory}/*.cpp ${aDirectory}/*.cxx
             ${aDirectory}/*.c)
 
-        execute_process(COMMAND ${FORMATTER} files ${JFC_SOURCES} --no-backup -l CPP -c ${CMAKE_SOURCE_DIR}/.uncrustify
+        execute_process(COMMAND ${FORMATTER} files ${JFC_SOURCES} --no-backup -c ${CMAKE_SOURCE_DIR}/.uncrustify #-l CPP
             WORKING_DIRECTORY ${aDirectory}
             RESULT_VARIABLE FORMATTER_RETURN_VALUE
             OUTPUT_VARIABLE FORMATTER_ERRORS)

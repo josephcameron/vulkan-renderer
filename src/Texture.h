@@ -30,7 +30,7 @@ public:
     ///@brief Builds a texture from a file
     ///@param aImageFile path to an image file
     ///@warning incomplete
-    Texture(const std::string &aImageFile, VkDevice &device, VkPhysicalDevice &physicalDevice, VkQueue &graphicsQueue, VkCommandPool &commandPool);
+    Texture(const std::string& aImageFile, VkDevice& device, VkPhysicalDevice& physicalDevice, VkQueue& graphicsQueue, VkCommandPool& commandPool);
 
     Texture() = delete;
 

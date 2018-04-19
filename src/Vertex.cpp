@@ -13,6 +13,7 @@ VkVertexInputBindingDescription Vertex::getBindingDescription()
     return bindingDescription;
 }
 
+
 std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescriptions()
 {
     std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions = {};
@@ -35,7 +36,8 @@ std::array<VkVertexInputAttributeDescription, 3> Vertex::getAttributeDescription
     return attributeDescriptions;
 }
 
-bool operator==(const Vertex &a, const Vertex &b)
+
+bool operator==(const Vertex& a, const Vertex& b)
 {
     return a.pos == b.pos && a.color == b.color && a.texCoord == b.texCoord;
 }

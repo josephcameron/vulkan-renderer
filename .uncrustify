@@ -8,10 +8,10 @@
 newlines                                  = lf       # auto/lf/crlf/cr
 
 # The original size of tabs in the input
-input_tab_size                            = 8        # number
+input_tab_size                            = 4        # number
 
 # The size of tabs in the output (only used if align_with_tabs=true)
-output_tab_size                           = 3        # number
+output_tab_size                           = 4        # number
 
 # The ASCII value of the string escape char, usually 92 (\) or 94 (^). (Pawn)
 string_escape_char                        = 92       # number
@@ -40,10 +40,10 @@ enable_digraphs                           = false    # false/true
 utf8_bom                                  = ignore   # ignore/add/remove/force
 
 # If the file contains bytes with values between 128 and 255, but is not UTF-8, then output as UTF-8
-utf8_byte                                 = false    # false/true
+utf8_byte                                 = true    # false/true
 
 # Force the output encoding to UTF-8
-utf8_force                                = false    # false/true
+utf8_force                                = true    # false/true
 
 #
 # Indenting
@@ -51,7 +51,7 @@ utf8_force                                = false    # false/true
 
 # The number of columns to indent per level.
 # Usually 2, 3, 4, or 8.
-indent_columns                            = 3        # number
+indent_columns                            = 4        # number
 
 # The continuation indent. If non-zero, this overrides the indent of '(' and '=' continuation indents.
 # For FreeBSD, this is set to 4. Negative value is absolute and not increased for each ( level
@@ -70,6 +70,7 @@ indent_cmt_with_tabs                      = false    # false/true
 # Whether to indent strings broken by '\' so that they line up
 indent_align_string                       = true     # false/true
 
+############################################################################################################################
 # The number of spaces to indent multi-line XML strings.
 # Requires indent_align_string=True
 indent_xml_string                         = 0        # number
@@ -1582,7 +1583,7 @@ mod_sort_using                            = false    # false/true
 
 # If TRUE, will sort consecutive single-line '#include' statements [C/C++] and '#import' statements [Obj-C]
 # This is generally a bad idea, as it may break your code.
-mod_sort_include                          = false    # false/true
+mod_sort_include                          = true    # false/true
 
 # If TRUE, it will move a 'break' that appears after a fully braced 'case' before the close brace.
 mod_move_case_break                       = false    # false/true
