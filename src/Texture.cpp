@@ -54,13 +54,14 @@ VkCommandBuffer beginSingleTimeCommands(VkDevice& device, VkCommandPool& command
 }
 
 
-void copyBufferToImage(VkQueue&       graphicsQueue,
-                       VkDevice&      device,
-                       VkCommandPool& commandPool,
-                       VkBuffer       buffer,
-                       VkImage        image,
-                       uint32_t       width,
-                       uint32_t       height)
+void copyBufferToImage(
+    VkQueue&       graphicsQueue,
+    VkDevice&      device,
+    VkCommandPool& commandPool,
+    VkBuffer       buffer,
+    VkImage        image,
+    uint32_t       width,
+    uint32_t       height)
 {
     VkCommandBuffer commandBuffer = beginSingleTimeCommands(device, commandPool);
 

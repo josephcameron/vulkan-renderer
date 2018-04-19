@@ -7,6 +7,7 @@ option(JFC_BUILD_DOCS "Build documentation" ON)
 option(JFC_BUILD_TESTS "Build unit tests" ON)
 option(JFC_BUILD_APP "Build the app" ON)
 option(JFC_AUTO_RUN_APP "Auto run the app on build" OFF)
+option(JFC_FORMAT_CODE "Format code with a tool" OFF)
 
 set(JFC_TARGET_PLATFORM "${CMAKE_HOST_SYSTEM_NAME}" CACHE STRING "Platform to compile the project for")
 

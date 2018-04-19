@@ -31,10 +31,11 @@ const std::vector<const char *const> deviceExtensions = {
 };
 }
 
-VkResult CreateDebugReportCallbackEXT(VkInstance                               instance,
-                                      const VkDebugReportCallbackCreateInfoEXT *pCreateInfo,
-                                      const VkAllocationCallbacks              *pAllocator,
-                                      VkDebugReportCallbackEXT                 *pCallback)
+VkResult CreateDebugReportCallbackEXT(
+    VkInstance                               instance,
+    const VkDebugReportCallbackCreateInfoEXT *pCreateInfo,
+    const VkAllocationCallbacks              *pAllocator,
+    VkDebugReportCallbackEXT                 *pCallback)
 {
     auto func = (PFN_vkCreateDebugReportCallbackEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
 
@@ -143,7 +144,7 @@ private:
     // Color texture SHOULD BE REMOVED
     uint32_t mipLevels;
     VkImage textureImage;
-    // VkDeviceMemory textureImageMemory;
+
     VkImageView textureImageView;
     VkSampler textureSampler;
 
@@ -861,9 +862,10 @@ private:
 
     VkFormat findDepthFormat()
     {
-        return findSupportedFormat({ VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
-                                   VK_IMAGE_TILING_OPTIMAL,
-                                   VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
+        return findSupportedFormat(
+            { VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT },
+            VK_IMAGE_TILING_OPTIMAL,
+            VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
     }
 
     bool hasStencilComponent(VkFormat format)
@@ -926,8 +928,7 @@ private:
             blit.dstSubresource.baseArrayLayer = 0;
             blit.dstSubresource.layerCount     = 1;
 
-            vkCmdBlitImage(
-                commandBuffer, image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &blit, VK_FILTER_LINEAR);
+            vkCmdBlitImage(commandBuffer, image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &blit, VK_FILTER_LINEAR);
 
             barrier.oldLayout     = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
             barrier.newLayout     = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
@@ -1009,15 +1010,16 @@ private:
         return imageView;
     }
 
-    void createImage(uint32_t              width,
-                     uint32_t              height,
-                     uint32_t              mipLevels,
-                     VkFormat              format,
-                     VkImageTiling         tiling,
-                     VkImageUsageFlags     usage,
-                     VkMemoryPropertyFlags properties,
-                     VkImage&              image,
-                     VkDeviceMemory&       imageMemory)
+    void createImage(
+        uint32_t              width,
+        uint32_t              height,
+        uint32_t              mipLevels,
+        VkFormat              format,
+        VkImageTiling         tiling,
+        VkImageUsageFlags     usage,
+        VkMemoryPropertyFlags properties,
+        VkImage&              image,
+        VkDeviceMemory&       imageMemory)
     {
         VkImageCreateInfo imageInfo = {};
 
@@ -1228,22 +1230,24 @@ private:
         VkBuffer       stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
 
-        createBuffer(bufferSize,
-                     VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-                     VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                     stagingBuffer,
-                     stagingBufferMemory);
+        createBuffer(
+            bufferSize,
+            VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            stagingBuffer,
+            stagingBufferMemory);
 
         void *data;
         vkMapMemory(device, stagingBufferMemory, 0, bufferSize, 0, &data);
         memcpy(data, indices.data(), (size_t)bufferSize);
         vkUnmapMemory(device, stagingBufferMemory);
 
-        createBuffer(bufferSize,
-                     VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-                     VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-                     indexBuffer,
-                     indexBufferMemory);
+        createBuffer(
+            bufferSize,
+            VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+            indexBuffer,
+            indexBufferMemory);
 
         copyBuffer(stagingBuffer, indexBuffer, bufferSize);
 
@@ -1255,11 +1259,12 @@ private:
     {
         VkDeviceSize bufferSize = sizeof(UniformBufferObject);
 
-        createBuffer(bufferSize,
-                     VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-                     VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-                     uniformBuffer,
-                     uniformBufferMemory);
+        createBuffer(
+            bufferSize,
+            VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+            VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+            uniformBuffer,
+            uniformBufferMemory);
     }
 
     void createDescriptorPool()
@@ -1840,14 +1845,15 @@ private:
         return buffer;
     }
 
-    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugReportFlagsEXT      flags,
-                                                        VkDebugReportObjectTypeEXT objType,
-                                                        uint64_t                   obj,
-                                                        size_t                     location,
-                                                        int32_t                    code,
-                                                        const char                 *layerPrefix,
-                                                        const char                 *msg,
-                                                        void                       *userData)
+    static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
+        VkDebugReportFlagsEXT      flags,
+        VkDebugReportObjectTypeEXT objType,
+        uint64_t                   obj,
+        size_t                     location,
+        int32_t                    code,
+        const char                 *layerPrefix,
+        const char                 *msg,
+        void                       *userData)
     {
         std::cerr << "validation layer: " << msg << std::endl;
 

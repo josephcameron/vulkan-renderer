@@ -120,8 +120,13 @@ function(jfc_format_c_cpp_source_recursive aDirectory)
         endforeach()]]
     endif()
 endfunction()
-jfc_format_c_cpp_source_recursive(${CMAKE_CURRENT_SOURCE_DIR})
-jfc_format_c_cpp_source_recursive(${CMAKE_SOURCE_DIR}/include/vkrenderer/)
+
+if (JFC_FORMAT_CODE)
+    jfc_format_c_cpp_source_recursive(${CMAKE_CURRENT_SOURCE_DIR})
+    jfc_format_c_cpp_source_recursive(${CMAKE_SOURCE_DIR}/include/vkrenderer/)
+else()
+    jfc_log(STATUS "Code Formatter" "Skipping format step")
+endif()
 
 # Generated header
 function(jfc_generate_cmake_header)

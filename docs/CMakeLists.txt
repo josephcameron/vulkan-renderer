@@ -3,9 +3,9 @@
 
 include("${CMAKE_SOURCE_DIR}/cmake/jfclib.cmake")
 
-function(jfc_generate_docs)
-    set(TAG "Documentation")
+set(TAG "Documentation")
 
+function(jfc_generate_docs)
     #[[! Generate README.md ]]
     function(jfc_generate_readmemd)
         jfc_log(WARNING ${TAG} "Readme gen is unimplemented.")
