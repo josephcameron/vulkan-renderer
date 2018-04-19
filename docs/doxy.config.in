@@ -2459,10 +2459,17 @@ HTML_OUTPUT            = @CMAKE_SOURCE_DIR@/build/docs/
 HTML_HEADER            = @DOXY_CONFIG_DIR@/header.html
 HTML_FOOTER            = @DOXY_CONFIG_DIR@/footer.html
 
-HTML_STYLESHEET        = @DOXY_CONFIG_DIR@/stylesheet.css
-HTML_EXTRA_STYLESHEET  = 
-HTML_EXTRA_FILES       = 
+#HTML_STYLESHEET        = @DOXY_CONFIG_DIR@/stylesheet.css
+#HTML_EXTRA_STYLESHEET  = 
 
+HTML_EXTRA_STYLESHEET  = @DOXY_CONFIG_DIR@/doxygen-modern.css
+HTML_EXTRA_FILES       = inconsolata.woff \
+                         SourceCodePro-Regular-webfont.woff \
+                         Roboto-Light-webfont.woff \
+                         Roboto-Regular-webfont.woff \
+                         folder.png \
+                         code.png \
+                         tabs.css
 
 # needs to be turned into cmake func arg
 USE_MDFILE_AS_MAINPAGE = "../README.md"
