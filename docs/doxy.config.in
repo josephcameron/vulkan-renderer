@@ -2456,5 +2456,13 @@ PROJECT_LOGO           = @DOXY_CONFIG_DIR@/icon.png
 
 HTML_OUTPUT            = @CMAKE_SOURCE_DIR@/build/docs/
 
+HTML_HEADER            = @DOXY_CONFIG_DIR@/header.html
+HTML_FOOTER            = @DOXY_CONFIG_DIR@/footer.html
+
+HTML_STYLESHEET        = @DOXY_CONFIG_DIR@/stylesheet.css
+HTML_EXTRA_STYLESHEET  = 
+HTML_EXTRA_FILES       = 
+
+
 # needs to be turned into cmake func arg
 USE_MDFILE_AS_MAINPAGE = "../README.md"
