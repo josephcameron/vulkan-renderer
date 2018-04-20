@@ -80,48 +80,33 @@ endif()
         endforeach()
     endif()
 endfunction()]]
-function(jfc_format_c_cpp_source_recursive aDirectory)
-    set(TAG "Code formatting stage")
-
-    if (NOT IS_DIRECTORY ${aDirectory})
-        jfc_log(FATAL_ERROR ${TAG} "${aDirectory} does not exist or is not a directory.")
-    endif()
-
-    set(FORMATTER_NAME "uncrustify")
-
-    find_program(FORMATTER "${FORMATTER_NAME}")
-
-    if(NOT FORMATTER)
-        jfc_log(FATAL_ERROR ${TAG} "${FORMATTER_NAME} not found! It is required to format the source code.")
-    else()
-        file(GLOB_RECURSE JFC_SOURCES
-            ${aDirectory}/*.h   ${aDirectory}/*.hpp
-            ${aDirectory}/*.cpp ${aDirectory}/*.cxx
-            ${aDirectory}/*.c)
-
-        execute_process(COMMAND ${FORMATTER} files ${JFC_SOURCES} --no-backup -c ${CMAKE_SOURCE_DIR}/.uncrustify #-l CPP
-            WORKING_DIRECTORY ${aDirectory}
-            RESULT_VARIABLE FORMATTER_RETURN_VALUE
-            OUTPUT_VARIABLE FORMATTER_ERRORS)
-
-        #[[foreach(JFC_SOURCE ${JFC_SOURCES})
-            execute_process(COMMAND clang-format -i ${JFC_SOURCE}
-                WORKING_DIRECTORY ${aDirectory} 
-                RESULT_VARIABLE FORMATTER_RETURN_VALUE
-                OUTPUT_VARIABLE FORMATTER_ERRORS)
-
-            get_filename_component(JFC_SOURCE_NAME ${JFC_SOURCE} NAME)
-
-            if(FORMATTER_RETURN_VALUE)
-                jfc_log(FATAL_ERROR ${TAG} "\"${JFC_SOURCE_NAME}\" failed to format: ${FORMATTER_ERRORS}")
-            else()
-                jfc_log(STATUS ${TAG} "\"${JFC_SOURCE_NAME}\" successfully formatted")
-            endif()
-        endforeach()]]
-    endif()
-endfunction()
 
 if (JFC_FORMAT_CODE)
+    function(jfc_format_c_cpp_source_recursive aDirectory)
+        set(TAG "Code formatting stage")
+
+        if (NOT IS_DIRECTORY ${aDirectory})
+            jfc_log(FATAL_ERROR ${TAG} "${aDirectory} does not exist or is not a directory.")
+        endif()
+
+        set(FORMATTER_NAME "uncrustify")
+
+        find_program(FORMATTER "${FORMATTER_NAME}")
+
+        if(NOT FORMATTER)
+            jfc_log(FATAL_ERROR ${TAG} "${FORMATTER_NAME} not found! It is required to format the source code.")
+        else()
+            file(GLOB_RECURSE JFC_SOURCES
+                ${aDirectory}/*.h   ${aDirectory}/*.hpp
+                ${aDirectory}/*.cpp ${aDirectory}/*.cxx
+                ${aDirectory}/*.c)
+
+            execute_process(COMMAND ${FORMATTER} files ${JFC_SOURCES} --no-backup -c ${CMAKE_SOURCE_DIR}/.uncrustify #-l CPP
+                WORKING_DIRECTORY ${aDirectory}
+                RESULT_VARIABLE FORMATTER_RETURN_VALUE
+                OUTPUT_VARIABLE FORMATTER_ERRORS)
+        endif()
+    endfunction()
     jfc_format_c_cpp_source_recursive(${CMAKE_CURRENT_SOURCE_DIR})
     jfc_format_c_cpp_source_recursive(${CMAKE_SOURCE_DIR}/include/vkrenderer/)
 else()
